@@ -1,18 +1,18 @@
 TEMPLATE = app
 
-QT += qml quick
-CONFIG += c++11
+QT += gui sql widgets
+CONFIG += c++11 console
 
 SOURCES += main.cpp \
     logfile.cpp \
-    getstate.cpp \
     strategy.cpp \
     planchange.cpp \
     timetable.cpp \
     traveller.cpp \
-    travelroad.cpp
+    createnewcustomer.cpp \
+    mainwindow.cpp
 
-RESOURCES += qml.qrc
+RESOURCES +=
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -22,10 +22,14 @@ include(deployment.pri)
 
 HEADERS += \
     logfile.h \
-    getstate.h \
     strategy.h \
     planchange.h \
     timetable.h \
     traveller.h \
-    travelroad.h
+    createnewcustomer.h \
+    mainwindow.h
+
+FORMS += \
+    createnewcustomer.ui \
+    mainwindow.ui
 
