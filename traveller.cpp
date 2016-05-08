@@ -116,8 +116,26 @@ vector<int>& Traveller::getTravelRoad()
     return this->myRoad;
 }
 
+void Traveller::initTimeForward()
+{
+   // currentPosition=make_pair(myRoad[0],passCities[myRoad[0]]);
+}
+
+void  Traveller::timeForward(int day,int hour)
+{
+    --currentPosition.second;
+    if(!currentPosition.second)
+    {
+
+    }
+}
+
+
+
+
 const vector<QString> Traveller::cities={"Beijing","Tianjin","Haerbin","Wulumuqi","Chendu","Luan","Jinan","Xian","Dalian","Yinchuan","Huhehaote","Weihai","Taibei"};\
 const map<QString,int> Traveller::cities_map={
     {"Beijing",0},{"Tianjin",1},{"Haerbin",2},{"Wulumuqi",3}
     ,{"Chendu",4},{"Luan",5},{"Jinan",6},{"Xian",7}
     ,{"Dalian",8},{"Yinchuan",9},{"Huhehaote",10},{"Weihai",11},{"Taibei",12}};
+

@@ -27,7 +27,6 @@ class Traveller
 public:
     /*构造函数运行时弹出新窗口要求用户输入*/
     Traveller();
- //   friend class Strategy;
 
 
 
@@ -72,16 +71,23 @@ public:
     void setStrategy(STRATEGY_TYPE selectedStrategy);
     STRATEGY_TYPE getStrategy();
 
+    /*时间推移初始化*/
+    void initTimeForward();
 
-   // void
+    /*随时间片推移函数*/
+    void timeForward(int day,int hour);
+
+
 private:
     int ID;                     //旅客编号
     CityName startPlace;         //起点城市
     CityName endPlace;           //终点城市
     map<CityName,int> passCities;//改成字典,添加停留时间
-    vector<int> myRoad;     //获取当前旅客路线
+    vector<int>  myRoad;     //获取当前旅客路线
     CityName currentCity;        //当前城市
     STRATEGY_TYPE myStrategy;   //策略类型
+
+    pair<CityName,int> currentPosition; //当前城市和到达下一城市所需小时数
 };
 
 #endif // TRAVELLER_H

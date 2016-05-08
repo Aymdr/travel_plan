@@ -42,6 +42,10 @@ public:
     //限时最少费用策略
     void leastFeeTime_strategy(Traveller& customer);
 
+    void initStrategy();
+private:
+    int shortPathTable[ALLCITY][ALLCITY];//记录路径
+    int Path[ALLCITY][ALLCITY];//记录最短的费用
 
 
 };

@@ -2,7 +2,7 @@
 
 Strategy::Strategy()
 {
-
+    initStrategy();
 }
 
 void Strategy::leastTime_strategy(Traveller& customer)
@@ -37,10 +37,51 @@ int Strategy::leastFee__strategy(Traveller& customer)
     }
 
 
+    //挑选出最短路径
+    int least_fee=INFINITY;
+    vector<int> least_fee_road;
+
+    for(auto& mid:allPassPro)
+    {
+        int temp_least_fee=0;
+        temp_least_fee+=Path[startCity][mid[0]];
+        for(auto i=mid.begin();i!=mid.end()-1;++i)
+        {
+            temp_least_fee+=Path[*i][*(i+1)];
+        }
+        temp_least_fee+=Path[*(mid.end()-1)][endCity];
+        if(temp_least_fee<least_fee)
+        {
+            least_fee=temp_least_fee;
+            least_fee_road=mid;
+        }
+
+    }
+    least_fee_road.insert(least_fee_road.begin(),startCity);
+    least_fee_road.push_back(endCity);
+
+    for(auto i=least_fee_road.begin();i!=least_fee_road.end()-1;++i)
+        qDebug()<<Path[*i][*(i+1)]<<"   fee";
+
+    customer.setTravelRoad(least_fee_road);
+    return least_fee;
+
+}
+
+void Strategy::leastFeeTime_strategy(Traveller& customer)
+{
+
+}
+
+Strategy::~Strategy()
+{
+
+}
+
+void Strategy::initStrategy()
+{
+
     //弗洛伊德算法
-    int Path[ALLCITY][ALLCITY];//记录最短的费用
-
-
     for(int i=0;i!=ALLCITY;++i)
     {
         for(int j=0;j!=ALLCITY;++j)
@@ -81,7 +122,7 @@ int Strategy::leastFee__strategy(Traveller& customer)
     }
 
     //初始化路径记录图
-    int shortPathTable[ALLCITY][ALLCITY];//记录路径
+    //int shortPathTable[ALLCITY][ALLCITY];//记录路径
     for(int i=0;i!=ALLCITY;++i)
     {
         for(int j=0;j!=ALLCITY;++j)
@@ -105,44 +146,4 @@ int Strategy::leastFee__strategy(Traveller& customer)
             }
         }
     }
-
-    //挑选出最短路径
-    int least_fee=INFINITY;
-    vector<int> least_fee_road;
-
-    for(auto& mid:allPassPro)
-    {
-        int temp_least_fee=0;
-        temp_least_fee+=Path[startCity][mid[0]];
-        for(auto i=mid.begin();i!=mid.end()-1;++i)
-        {
-            temp_least_fee+=Path[*i][*(i+1)];
-        }
-        temp_least_fee+=Path[*(mid.end()-1)][endCity];
-        if(temp_least_fee<least_fee)
-        {
-            least_fee=temp_least_fee;
-            least_fee_road=mid;
-        }
-
-    }
-    least_fee_road.insert(least_fee_road.begin(),startCity);
-    least_fee_road.push_back(endCity);
-
-    for(auto i=least_fee_road.begin();i!=least_fee_road.end()-1;++i)
-        qDebug()<<Path[*i][*(i+1)]<<"   fee";
-  //  qDebug()<<"thiefuniverse"<<endl;
-    customer.setTravelRoad(least_fee_road);
-    return least_fee;
-
-}
-
-void Strategy::leastFeeTime_strategy(Traveller& customer)
-{
-
-}
-
-Strategy::~Strategy()
-{
-
 }

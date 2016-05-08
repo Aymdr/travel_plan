@@ -11,7 +11,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
+   // QTimer systemTime=new QTimer;
     MainWindow user_main;
     user_main.show();
 

@@ -12,7 +12,7 @@ bool TimeTable::connectTimeTable()
 {
     db=QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("localhost");
-    db.setDatabaseName("tranvelplan");
+    db.setDatabaseName("hell");
 
     db.setUserName("root");
     db.setPassword("ssopq");
@@ -30,7 +30,7 @@ bool TimeTable::connectTimeTable()
 vector<Traveller::CityName> TimeTable::getNextCity(Traveller::CityName currentCity)
 {
     QSqlQuery queryTool;
-    queryTool.exec("SELECT arrivecity from NewTravel where departcity=\""+Traveller::cities.at(currentCity)+"\"");
+    queryTool.exec("SELECT arrivecity from travel where departcity=\""+Traveller::cities.at(currentCity)+"\"");
     qDebug()<<Traveller::cities.at(currentCity)<<endl;
 
     QSqlRecord queryHis=queryTool.record();
@@ -51,7 +51,7 @@ vector<Traveller::CityName> TimeTable::getNextCity(Traveller::CityName currentCi
     qDebug()<<"print nextCities:"<<endl;
     for(auto i=nextCity.begin();i!=nextCity.end();++i)
     {
-        qDebug()<<*i<<endl;
+ //       qDebug()<<*i<<endl;
     }
     return nextCity;
 
@@ -78,7 +78,7 @@ int TimeTable::getPrice(int transportId)
    //   vector<QString> citiesTwo={"Beijing","Tianjin","Haerbin","Wulumuqi","Chendu","Luan","Jinan","Xian","Dalian","Yinchuan","Huhehaote","Weihai","Taibei"};
 
       QSqlQuery queryTool;
-      queryTool.exec("SELECT id,price from NewTravel where arrivecity=\""+Traveller::cities[cityA]+"\" and departcity=\""+Traveller::cities[cityB]+"\"");
+      queryTool.exec("SELECT id,price from travel where arrivecity=\""+Traveller::cities[cityA]+"\" and departcity=\""+Traveller::cities[cityB]+"\"");
 
       QSqlRecord queryHis=queryTool.record();
 
@@ -108,7 +108,7 @@ int TimeTable::getPrice(int transportId)
       if(tempMin.second==BIGVALUE)
       {
 
-          qDebug()<<Traveller::cities[cityA]<<" and "<<Traveller::cities[cityB]<<" NO WAY"<<endl;
+      //    qDebug()<<Traveller::cities[cityA]<<" and "<<Traveller::cities[cityB]<<" NO WAY"<<endl;
           return tempMin;
       }
       else
